@@ -1,0 +1,24 @@
+.header--nav {
+  display: flex;
+  align-items: center;
+}
+
+.header--nav a {
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+a:hover {
+  color: skyblue;
+  transform: scale(1.2);
+}
+
+.active {
+  color: white !important;
+  background: skyblue;
+  padding: 10px;
+  border-radius: 10px;
+}
