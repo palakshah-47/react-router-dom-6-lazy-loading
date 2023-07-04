@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, NavLink, useHistory, useLocation } from "react-router-dom";
+import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../AuthProvider";
 import "./header.css";
 
@@ -10,7 +10,7 @@ import "./header.css";
 
 export default function Index() {
   const [auth, setAuth] = useContext(AuthContext);
-  const history = useHistory;
+  const navigate = useNavigate();
   const { loggedIn, user } = auth;
 
   const { pathname } = useLocation();
@@ -18,10 +18,10 @@ export default function Index() {
   const handleLogout = () => {
     setAuth({
       loggedIn: false,
-      user: null
+      user: null,
     });
 
-    history.push("/");
+    navigate("/");
   };
 
   console.log(auth);
@@ -51,7 +51,7 @@ export default function Index() {
                   height: 30,
                   objectFit: "cover",
                   borderRadius: "50%",
-                  marginRight: 8
+                  marginRight: 8,
                 }}
               />
               {user.first_name} {user.last_name}

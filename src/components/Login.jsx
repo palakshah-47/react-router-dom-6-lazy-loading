@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useContext, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthProvider";
 import Button from "./Button";
 import Input from "./Input";
 
 export default function Login() {
-  const history = useHistory;
+  const navigate = useNavigate();
   const [, setAuth] = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
@@ -41,7 +41,7 @@ export default function Login() {
     try {
       await axios.post("https://reqres.in/api/login", {
         email,
-        password
+        password,
       });
 
       const { data } = await axios.get("https://reqres.in/api/users/2");
@@ -49,10 +49,10 @@ export default function Login() {
       // After login, set the user....
       setAuth({
         loggedIn: true,
-        user: data.data
+        user: data.data,
       });
 
-      history.push("/");
+      navigate("/");
     } catch (e) {
       setLoginError("An error was occurred. Please check your credentials.");
     } finally {
