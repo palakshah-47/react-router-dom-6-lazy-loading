@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 // import { useRouteMatch } from "react-router";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 // Exercise:
 // Implement loading in the API.
@@ -9,9 +9,9 @@ import { Link, useParams } from "react-router-dom";
 
 export default function Api() {
   const [data, setData] = useState([]);
-  const match = useParams;
-
-  const [selectedData, setSelectedData] = useState(null);
+  const location = useLocation();
+  const arr = location.pathname.split("/");
+  const partialPath = arr[arr.length - 2];
   const [loading, setLoading] = useState(true);
 
   const fetchPosts = async () => {
@@ -34,7 +34,7 @@ export default function Api() {
       key={d.id}
       // onClick={() => handleListClick(d)}
     >
-      <Link to={`${match.url}/${d.id}`}>{d.title}</Link>
+      <Link to={`${partialPath}/posts/${d.id}`}>{d.title}</Link>
     </li>
   ));
 
@@ -44,15 +44,6 @@ export default function Api() {
 
       {/* Show loading if the post is loading.. */}
       {loading && "Loading posts...Please wait.."}
-
-      {/* Render */}
-      {selectedData && (
-        <div>
-          <h2>{selectedData.title}</h2>
-          <h3>By {selectedData.userId}</h3>
-          <p>{selectedData.body}</p>
-        </div>
-      )}
       <hr />
       <ul>{dataJsx}</ul>
     </div>

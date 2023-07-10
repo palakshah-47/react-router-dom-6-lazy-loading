@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { User } from "./User";
 
 export default function Post() {
+  const navigate = useNavigate();
   let { id } = useParams();
 
   // Store the post in the component state
@@ -34,7 +36,9 @@ export default function Post() {
       {post && (
         <div>
           <h1>{post.title}</h1>
+          <User id={post.userId} />
           <p>{post.body}</p>
+          <button onClick={() => navigate("/posts")}>Back</button>
         </div>
       )}
     </>

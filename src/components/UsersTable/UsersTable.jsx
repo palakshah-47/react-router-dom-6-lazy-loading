@@ -63,6 +63,18 @@ function UsersTable() {
         </button>
       ));
 
+  const handlePrev = () => {
+    let currPage = page;
+    if (currPage === 1) return;
+    setPage(currPage - 1);
+  };
+
+  const handleNext = () => {
+    let currPage = page;
+    if (currPage === users.total_pages) return;
+    setPage(currPage + 1);
+  };
+
   return (
     <>
       {loading && "Loading...Please wait."}
@@ -76,9 +88,9 @@ function UsersTable() {
         </thead>
         <tbody>{usersTableRows}</tbody>
       </table>
-      <button>prev</button>
+      <button onClick={() => handlePrev()}>prev</button>
       {paginationJsx}
-      <button>next</button>
+      <button onClick={() => handleNext()}>next</button>
     </>
   );
 }
